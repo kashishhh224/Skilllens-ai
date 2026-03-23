@@ -101,49 +101,6 @@ AI-Resume-Analyzer
     └── job_skills.json
 ```
 
----
-
-## ⚙️ Installation & Setup
-
-1️⃣ Clone the repository
-
-```id="lkn4zk"
-git clone <your-repository-link>
-cd AI-Resume-Analyzer
-```
-
-2️⃣ Create a virtual environment
-
-```id="09h7ax"
-python -m venv venv
-```
-
-3️⃣ Activate the environment
-
-```id="suxi8y"
-venv\Scripts\activate
-```
-
-4️⃣ Install dependencies
-
-```id="nac5l1"
-pip install -r requirements.txt
-```
-
-5️⃣ Run the application
-
-```id="ru7ysu"
-python app.py
-```
-
-6️⃣ Open in browser
-
-```id="0hy7vi"
-http://127.0.0.1:5000
-```
-
----
-
 ## 🚀 Future Enhancements
 
 * 📌 Job description-based matching
