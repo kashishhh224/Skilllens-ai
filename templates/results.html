@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Analysis Results — SkillLens AI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="app-header">
+        <a href="{{ url_for('index') }}" class="logo">
+          <span class="logo-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2 17l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          SkillLens AI
+        </a>
+        <p class="tagline">Analysis results for {{ name }}</p>
+      </header>
+
+      <main class="app-main">
+        <!-- Results Dashboard - Score -->
+        <section class="card results-header-card animate-in">
+          <div class="results-header">
+            <div class="results-meta">
+              <h1>{{ name }}</h1>
+              <p class="subtitle">
+                Target role:
+                <span class="pill pill-role">{{ role }}</span>
+              </p>
+            </div>
+            <div class="score-widget">
+              <div class="score-label">Resume Score</div>
+              <div class="score-value" data-score="{{ score }}">{{ score }}</div>
+              <div class="score-bar">
+                <div class="score-bar-fill" style="width: 0%" data-width="{{ score }}"></div>
+              </div>
+              <div class="score-caption">Out of 100</div>
+              <div class="skill-match-badge">
+                <span class="skill-match-value">{{ skill_match_pct }}%</span> skill match
+              </div>
+              {% if ats_score is defined %}
+              <div class="skill-match-badge">
+                <span class="skill-match-value">{{ ats_score }}%</span> ATS compatibility
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </section>
+
+        {% if score_breakdown %}
+        <section class="card animate-in delay-1">
+          <h2>
+            <span class="card-icon">📊</span>
+            Resume Strength Breakdown
+          </h2>
+          <p class="muted">A simple breakdown of where your score comes from.</p>
+
+          <div class="dashboard-grid-3">
+            <div class="card">
+              <h3 class="section-title">Skills Score</h3>
+              <div class="mini-metric">
+                <div class="value">{{ score_breakdown.skills_score }}</div>
+                <div class="label">out of 40</div>
+              </div>
+            </div>
+            <div class="card">
+              <h3 class="section-title">Experience Score</h3>
+              <div class="mini-metric">
+                <div class="value">{{ score_breakdown.experience_score }}</div>
+                <div class="label">out of 15</div>
+              </div>
+            </div>
+            <div class="card">
+              <h3 class="section-title">Projects Score</h3>
+              <div class="mini-metric">
+                <div class="value">{{ score_breakdown.projects_score }}</div>
+                <div class="label">out of 15</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="chart-wrap">
+            <h3 class="section-title">Score breakdown (visual)</h3>
+            <p class="muted">Shows how your overall score is distributed across sections.</p>
+            <div class="dashboard-grid-3">
+              <div class="card">
+                <h3 class="section-title">Overall score</h3>
+                <canvas id="overallBreakdownChart" height="140"></canvas>
+              </div>
+              <div class="card">
+                <h3 class="section-title">Skill match</h3>
+                <canvas id="skillMatchChart" height="140"></canvas>
+              </div>
+              <div class="card">
+                <h3 class="section-title">Section points</h3>
+                <canvas id="sectionPointsChart" height="140"></canvas>
+              </div>
+            </div>
+          </div>
+
+          {% if ats_breakdown %}
+          <div class="chart-wrap">
+            <h3 class="section-title">ATS Breakdown</h3>
+            <p class="muted">Keyword presence, formatting, and section completeness.</p>
+            <canvas id="atsChart" height="120"></canvas>
+          </div>
+          {% endif %}
+        </section>
+        {% endif %}
+
+        {% if jd_match_pct is not none %}
+        <section class="card animate-in delay-2">
+          <h2>
+            <span class="card-icon">🧩</span>
+            Job Description Matching
+          </h2>
+          <p class="muted">Based on the job description you pasted.</p>
+          <div class="mini-metric">
+            <div class="label">Match</div>
+            <div class="value">{{ jd_match_pct }}%</div>
+          </div>
+
+          {% if jd_missing_keywords %}
+          <h3 class="section-title" style="margin-top: 1rem;">Missing keywords</h3>
+          <ul class="pill-list pill-list-warning">
+            {% for k in jd_missing_keywords %}
+            <li class="pill pill-warning">{{ k }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+
+          {% if jd_matched_keywords %}
+          <h3 class="section-title" style="margin-top: 1rem;">Matched keywords</h3>
+          <ul class="pill-list">
+            {% for k in jd_matched_keywords %}
+            <li class="pill pill-success">{{ k }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </section>
+        {% endif %}
+
+        <section class="dashboard-grid">
+          <div class="card skill-card animate-in delay-1">
+            <h2>
+              <span class="card-icon card-icon-success">✓</span>
+              Extracted Skills
+            </h2>
+            {% if extracted_skills %}
+            <ul class="pill-list">
+              {% for skill in extracted_skills %}
+              <li class="pill pill-success">{{ skill }}</li>
+              {% endfor %}
+            </ul>
+            <p class="skill-count">{{ extracted_skills|length }} skills detected</p>
+            {% else %}
+            <p class="muted">
+              No skills were confidently detected. Consider adding a dedicated
+              skills section with clear bullet points.
+            </p>
+            {% endif %}
+          </div>
+
+          <div class="card skill-card animate-in delay-2">
+            <h2>
+              <span class="card-icon card-icon-warning">!</span>
+              Missing Skills for {{ role }}
+            </h2>
+            {% if missing_skills %}
+            <ul class="pill-list pill-list-warning">
+              {% for skill in missing_skills %}
+              <li class="pill pill-warning">{{ skill }}</li>
+              {% endfor %}
+            </ul>
+            <p class="muted">
+              Adding or demonstrating these skills can significantly improve
+              your alignment with the target role.
+            </p>
+            {% else %}
+            <p class="success">
+              Great work — your resume already covers the key skills we expect
+              for this role.
+            </p>
+            {% endif %}
+          </div>
+        </section>
+
+        {% if skills_found or keywords_found %}
+        <section class="card keyword-card animate-in delay-3">
+          <h2>
+            <span class="card-icon">🔍</span>
+            Keywords Found in Resume
+          </h2>
+          <p class="muted">These role-relevant terms were detected in your resume:</p>
+          <div class="keyword-highlights">
+            {% if skills_found %}
+            <div class="keyword-group">
+              <span class="keyword-label">Skills:</span>
+              {% for s in skills_found %}
+              <span class="pill pill-highlight">{{ s }}</span>
+              {% endfor %}
+            </div>
+            {% endif %}
+            {% if keywords_found %}
+            <div class="keyword-group">
+              <span class="keyword-label">Keywords:</span>
+              {% for k in keywords_found %}
+              <span class="pill pill-keyword">{{ k }}</span>
+              {% endfor %}
+            </div>
+            {% endif %}
+          </div>
+        </section>
+        {% endif %}
+
+        {% if resume_keywords %}
+        <section class="card keyword-card animate-in delay-4">
+          <h2>
+            <span class="card-icon">🧠</span>
+            Keyword Analysis (Top terms)
+          </h2>
+          <p class="muted">High-signal terms extracted from your resume text.</p>
+          <div class="keyword-highlights">
+            <div class="keyword-group">
+              <span class="keyword-label">Keywords:</span>
+              {% for k in resume_keywords %}
+              <span class="pill pill-highlight">{{ k }}</span>
+              {% endfor %}
+            </div>
+          </div>
+        </section>
+        {% endif %}
+
+        <section class="card suggestions-card animate-in delay-4">
+          <h2>
+            <span class="card-icon">💡</span>
+            Suggestions for Improvement
+          </h2>
+          {% if suggestions %}
+          <ol class="suggestion-list">
+            {% for s in suggestions %}
+            <li>{{ s }}</li>
+            {% endfor %}
+          </ol>
+          {% else %}
+          <p class="success">
+            No major issues detected. You can still iterate by tailoring your
+            resume for specific job postings.
+          </p>
+          {% endif %}
+        </section>
+
+        <div class="actions-row">
+          <a href="{{ url_for('download_report') }}" class="btn primary-btn" download>
+            Download Report
+          </a>
+          <a href="{{ url_for('index') }}" class="btn secondary-btn">
+            Analyze another resume
+          </a>
+        </div>
+      </main>
+
+      <footer class="app-footer">
+        SkillLens AI — Built with Flask, spaCy, and Scikit-learn
+      </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const fill = document.querySelector(".score-bar-fill");
+        if (fill) {
+          const width = fill.getAttribute("data-width") || "0";
+          setTimeout(() => {
+            fill.style.width = width + "%";
+          }, 300);
+        }
+
+        {% if score_breakdown %}
+        const overallBreakdownCanvas = document.getElementById("overallBreakdownChart");
+        const skillMatchCanvas = document.getElementById("skillMatchChart");
+        const sectionPointsCanvas = document.getElementById("sectionPointsChart");
+
+        const skillsPoints = {{ score_breakdown.skills_score|default(0) }};
+        const expPoints = {{ score_breakdown.experience_score|default(0) }};
+        const projPoints = {{ score_breakdown.projects_score|default(0) }};
+        const overall = {{ score_breakdown.overall_score|default(score) }};
+        const otherPoints = Math.max(0, overall - (skillsPoints + expPoints + projPoints));
+
+        const skillMatchPct = {{ skill_match_pct|default(0) }};
+        const skillMatchRemainder = Math.max(0, 100 - skillMatchPct);
+
+        const gridColor = "rgba(148,163,184,0.15)";
+        const tickMuted = "#94A3B8";
+        const tickText = "#E2E8F0";
+
+        if (window.Chart) {
+          if (overallBreakdownCanvas) {
+            new Chart(overallBreakdownCanvas, {
+              type: "doughnut",
+              data: {
+                labels: ["Skills", "Experience", "Projects", "Other"],
+                datasets: [{
+                  data: [skillsPoints, expPoints, projPoints, otherPoints],
+                  backgroundColor: [
+                    "rgba(6,182,212,0.55)",
+                    "rgba(34,197,94,0.55)",
+                    "rgba(79,70,229,0.55)",
+                    "rgba(148,163,184,0.25)"
+                  ],
+                  borderColor: [
+                    "rgba(6,182,212,0.9)",
+                    "rgba(34,197,94,0.9)",
+                    "rgba(79,70,229,0.9)",
+                    "rgba(148,163,184,0.35)"
+                  ],
+                  borderWidth: 1
+                }]
+              },
+              options: {
+                cutout: "62%",
+                plugins: {
+                  legend: { labels: { color: tickText } },
+                  tooltip: { callbacks: { label: (ctx) => `${ctx.label}: ${ctx.raw} pts` } }
+                }
+              }
+            });
+          }
+
+          if (skillMatchCanvas) {
+            new Chart(skillMatchCanvas, {
+              type: "doughnut",
+              data: {
+                labels: ["Matched", "Missing"],
+                datasets: [{
+                  data: [skillMatchPct, skillMatchRemainder],
+                  backgroundColor: ["rgba(6,182,212,0.6)", "rgba(245,158,11,0.25)"],
+                  borderColor: ["rgba(6,182,212,0.9)", "rgba(245,158,11,0.45)"],
+                  borderWidth: 1
+                }]
+              },
+              options: {
+                cutout: "62%",
+                plugins: {
+                  legend: { labels: { color: tickText } },
+                  tooltip: { callbacks: { label: (ctx) => `${ctx.label}: ${ctx.raw}%` } }
+                }
+              }
+            });
+          }
+
+          if (sectionPointsCanvas) {
+            new Chart(sectionPointsCanvas, {
+              type: "bar",
+              data: {
+                labels: ["Skills", "Experience", "Projects"],
+                datasets: [{
+                  label: "Points",
+                  data: [skillsPoints, expPoints, projPoints],
+                  backgroundColor: ["rgba(6,182,212,0.55)", "rgba(34,197,94,0.55)", "rgba(79,70,229,0.55)"],
+                  borderColor: ["rgba(6,182,212,0.9)", "rgba(34,197,94,0.9)", "rgba(79,70,229,0.9)"],
+                  borderWidth: 1
+                }]
+              },
+              options: {
+                responsive: true,
+                plugins: { legend: { display: false } },
+                scales: {
+                  y: { beginAtZero: true, ticks: { color: tickMuted }, grid: { color: gridColor } },
+                  x: { ticks: { color: tickText }, grid: { display: false } }
+                }
+              }
+            });
+          }
+        }
+        {% endif %}
+
+        const atsCanvas = document.getElementById("atsChart");
+        {% if ats_breakdown %}
+        if (atsCanvas && window.Chart) {
+          const data = {
+            labels: ["Keyword presence", "Formatting", "Section completeness"],
+            datasets: [{
+              label: "ATS points",
+              data: [
+                {{ ats_breakdown.keyword_presence|default(0) }},
+                {{ ats_breakdown.formatting|default(0) }},
+                {{ ats_breakdown.section_completeness|default(0) }}
+              ],
+              backgroundColor: ["rgba(79,70,229,0.55)", "rgba(6,182,212,0.55)", "rgba(34,197,94,0.55)"],
+              borderColor: ["rgba(79,70,229,0.9)", "rgba(6,182,212,0.9)", "rgba(34,197,94,0.9)"],
+              borderWidth: 1
+            }]
+          };
+          new Chart(atsCanvas, {
+            type: "bar",
+            data,
+            options: {
+              responsive: true,
+              plugins: { legend: { display: false } },
+              scales: {
+                y: { beginAtZero: true, ticks: { color: "#94A3B8" }, grid: { color: "rgba(148,163,184,0.15)" } },
+                x: { ticks: { color: "#E2E8F0" }, grid: { display: false } }
+              }
+            }
+          });
+        }
+        {% endif %}
+      });
+    </script>
+  </body>
+</html>

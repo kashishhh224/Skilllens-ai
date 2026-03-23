@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>SkillLens AI — Your Resume, Perfected by AI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Land your dream job with AI-powered resume analysis. Optimize for ATS, detect missing skills, and get expert suggestions instantly." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-container">
+        <a href="{{ url_for('index') }}" class="logo">
+          <span class="logo-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2 17l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          SkillLens AI
+        </a>
+        <nav class="nav-links">
+          <a href="#features">Features</a>
+          <a href="#transformation">Results</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+        <a href="#analyze" class="btn primary-btn header-cta">Analyze My Resume with AI</a>
+      </div>
+    </header>
+
+    <main>
+      <!-- Main Banner / Hero -->
+      <section class="hero">
+        <div class="hero-container">
+          <div class="hero-text-content">
+            <div class="badge">Next-Gen Resume Intelligence</div>
+            <h1 class="hero-title">Your resume, <span>perfected by AI</span></h1>
+            <p class="hero-subtitle">
+              Save hours of editing and boost your interview chances with universal ATS optimization and advanced AI insights.
+            </p>
+            <div class="hero-actions">
+              <a href="#analyze" class="btn primary-btn lg">Start Analysis Now</a>
+              <a href="#features" class="btn secondary-btn lg">Improve My Resume</a>
+            </div>
+            <div class="hero-stats">
+              <div class="stat-item">
+                <span class="stat-value">3x</span>
+                <span class="stat-label">More interview chances</span>
+              </div>
+              <div class="stat-divider"></div>
+              <div class="stat-item">
+                <span class="stat-value">95%</span>
+                <span class="stat-label">Recruiter visibility</span>
+              </div>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <div class="hero-image-wrapper">
+              <img src="{{ url_for('static', filename='hero_resume_ai.png') }}" alt="AI Resume Analysis Illustration" class="hero-img">
+              <div class="floating-card c1">ATS Score: 94</div>
+              <div class="floating-card c2">Skill Match: 88%</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="trust-signals">
+          <p class="trust-text">Trusted by candidates applying to</p>
+          <div class="trust-logos">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google" height="24">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" height="24">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg" alt="Meta" height="24">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple" height="24">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" alt="Microsoft" height="24">
+          </div>
+        </div>
+      </section>
+
+      <!-- Steps Section -->
+      <section class="steps-section" id="how-it-works">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title">3 Simple Steps to Success</h2>
+            <p class="section-subtitle">Get your improved resume in under 60 seconds.</p>
+          </div>
+          <div class="steps-grid">
+            <div class="step-card">
+              <div class="step-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+              </div>
+              <div class="step-content">
+                <span class="step-num">Step 01</span>
+                <h3>Upload Resume</h3>
+                <p>Securely upload your DOC, PDF, or DOCX resume to our AI engine.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              </div>
+              <div class="step-content">
+                <span class="step-num">Step 02</span>
+                <h3>Get AI Insights</h3>
+                <p>Receive extreme detail on ATS score, keyword match, and readability.</p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+              </div>
+              <div class="step-content">
+                <span class="step-num">Step 03</span>
+                <h3>Download Results</h3>
+                <p>Download your optimized report and land more interviews instantly.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Advanced Features Section -->
+      <section class="features-section" id="features">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title">Advanced AI Features</h2>
+            <p class="section-subtitle">Everything you need to beat the ATS and impress recruiters across all industries.</p>
+          </div>
+          <div class="features-grid">
+            <div class="feature-card">
+              <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+              <h3>Universal ATS Optimization</h3>
+              <p>Works across all industries without needing specific job role input.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+              <h3>Keyword Match Score</h3>
+              <p>Shows exact alignment with industry-standard and role-specific keywords.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
+              <h3>Grammar & Readability</h3>
+              <p>Improves clarity and professionalism using advanced linguistic analysis.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14M22 4L12 14.01l-3-3"/></svg></div>
+              <h3>Achievement Quantification</h3>
+              <p>Converts static responsibilities into impactful, measurable results.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+              <h3>Soft Skills Detection</h3>
+              <p>Identifies leadership, communication, and adaptability traits automatically.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div>
+              <h3>Structure Analysis</h3>
+              <p>Ensures perfect balance and ATS readability for your resume layout.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+              <h3>Industry Benchmarking</h3>
+              <p>Compares your resume against the top-performing resumes in your field.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+              <h3>Cover Letter Generator</h3>
+              <p>AI-powered tailored cover letters based on your unique resume content.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
+              <h3>LinkedIn Profile Sync</h3>
+              <p>Suggests improvements for your LinkedIn presence based on resume data.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
+              <h3>Job Role Prediction</h3>
+              <p>AI suggests suitable roles you might have missed based on your skills.</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+              <h3>Visual Insights</h3>
+              <p>Shows the recruiter's perspective on your resume's design and layout.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Transformation Section -->
+      <section class="transformation-section" id="transformation">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title">See the Transformation</h2>
+            <p class="section-subtitle">Real results from our AI-driven optimization.</p>
+          </div>
+          <div class="transformation-container">
+            <div class="comparison">
+              <div class="comparison-item before">
+                <div class="comparison-tag">Before Optimization</div>
+                <div class="resume-sketch">
+                  <div class="line title"></div>
+                  <div class="line body"></div>
+                  <div class="line body w80"></div>
+                  <div class="line body w90"></div>
+                </div>
+                <div class="score-card">
+                  <span class="label">ATS Score</span>
+                  <span class="value red">42</span>
+                  <div class="mini-bar"><div class="fill" style="width: 42%; background: #EF4444;"></div></div>
+                </div>
+              </div>
+              <div class="comparison-arrow">
+                <svg width="48" height="40" viewBox="0 0 48 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M28 10L38 20L28 30" stroke="#2563EB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M10 20H38" stroke="#2563EB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="comparison-item after">
+                <div class="comparison-tag gradient">After SkillLens AI</div>
+                <div class="resume-sketch">
+                  <div class="line title blue"></div>
+                  <div class="line body"></div>
+                  <div class="line body w80"></div>
+                  <div class="line body w90"></div>
+                  <div class="line highlight"></div>
+                </div>
+                <div class="score-card">
+                  <span class="label">ATS Score</span>
+                  <span class="value green">91</span>
+                  <div class="mini-bar"><div class="fill" style="width: 91%; background: #10B981;"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Upload/Analysis Section (The Core Tool) -->
+      <section id="analyze" class="tool-section">
+        <div class="container">
+          <div class="card tool-card">
+            <div class="section-header" style="text-align: left; margin-bottom: 2rem; max-width: 100%;">
+              <h2 class="section-title">Analyze Your Resume</h2>
+              <p class="section-subtitle">Upload your file to get advanced AI insights instantly.</p>
+            </div>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div class="flash-container">
+              {% for category, message in messages %}
+              <div class="flash flash-{{ category }}">{{ message }}</div>
+              {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
+
+            <form id="resume-form" class="upload-form" action="{{ url_for('analyze') }}" method="post" enctype="multipart/form-data">
+              <div class="file-dropzone" id="file-dropzone">
+                <input type="file" id="resume" name="resume" accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" required />
+                <div class="dropzone-content">
+                  <div class="dropzone-icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                      <polyline points="14 2 14 8 20 8"/>
+                      <path d="M12 18v-6M9 15l3-3 3 3"/>
+                    </svg>
+                  </div>
+                  <div class="dropzone-text">
+                    <span class="primary">Drag & drop your resume here</span>
+                    <span class="secondary">or click to browse — PDF or DOCX</span>
+                  </div>
+                </div>
+                <div id="file-name" class="file-name"></div>
+                <div id="upload-success" class="upload-success hidden">
+                  <span class="success-icon">✓</span> File ready for analysis
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="field-group">
+                  <label for="job_role">Target role (Optional)</label>
+                  <select id="job_role" name="job_role">
+                    <option value="">Universal ATS Optimization</option>
+                    {% for role in roles %}
+                    <option value="{{ role }}">{{ role }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+
+              <div class="field-group">
+                <label for="job_description">Specific Job Description (Optional)</label>
+                <textarea id="job_description" name="job_description" rows="4" placeholder="Paste the job description for customized keyword matching..."></textarea>
+              </div>
+
+              <button type="submit" class="btn primary-btn lg" id="submit-btn" style="width: 100%;">
+                <span class="btn-text">Analyze My Resume Now</span>
+                <span class="btn-loader hidden">
+                  <span class="spinner"></span> AI analyzing...
+                </span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- Testimonials -->
+      <section class="testimonials-section">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title">Success Stories</h2>
+            <p class="section-subtitle">Join thousands of job seekers who landed interviews faster.</p>
+          </div>
+          <div class="testimonials-grid">
+            <div class="testimonial-card">
+              <div class="stars">★★★★★</div>
+              <p>"SkillLens AI found exactly what was missing. Landed 3 interviews in one week!"</p>
+              <div class="author">
+                <div class="author-info">
+                  <h4>Srinivasan R.</h4>
+                  <p>Software Engineer</p>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-card">
+              <div class="stars">★★★★★</div>
+              <p>"The ATS optimization is a lifesaver. My match rate is now consistently above 90%."</p>
+              <div class="author">
+                <div class="author-info">
+                  <h4>Ananya K.</h4>
+                  <p>Product Manager</p>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-card">
+              <div class="stars">★★★★★</div>
+              <p>"I never knew my resume had so many keyword gaps. This tool is brilliant."</p>
+              <div class="author">
+                <div class="author-info">
+                  <h4>Michael T.</h4>
+                  <p>Sales Executive</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ Section -->
+      <section class="faq-section" id="faq">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title">Common Questions</h2>
+            <p class="section-subtitle">Everything you need to know about our technology.</p>
+          </div>
+          <div class="faq-list">
+            <div class="faq-item">
+              <div class="faq-question">
+                How does Universal ATS Optimization work?
+                <span class="icon">+</span>
+              </div>
+              <div class="faq-answer">
+                Our AI uses massive datasets of all industry niches to identify the universal "gold standards" that modern Applicant Tracking Systems look for, even without a specific job role.
+              </div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-question">
+                Is my resume data kept private?
+                <span class="icon">+</span>
+              </div>
+              <div class="faq-answer">
+                Absolutely. We use enterprise-grade encryption and do not store resumes longer than needed for the analysis session.
+              </div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-question">
+                Can I really boost my interview chances?
+                <span class="icon">+</span>
+              </div>
+              <div class="faq-answer">
+                Yes! Resumes optimized for keywords and readability consistently pass the initial screen better, which is where 75% of resumes are rejected.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Final CTA -->
+      <section class="final-cta">
+        <div class="container">
+          <h2 class="section-title">Launch Your Career with AI</h2>
+          <p>Get the professional edge you need to stand out from the crowd.</p>
+          <a href="#analyze" class="btn lg" style="background: white; color: var(--primary);">Analyze My Resume with AI</a>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <h3>SkillLens AI</h3>
+            <p>Empowering careers through advanced artificial intelligence.</p>
+          </div>
+          <div class="footer-bottom">
+            <p>&copy; 2026 SkillLens AI. All rights reserved. <a href="#">Privacy Policy</a> | <a href="#">Terms</a></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>

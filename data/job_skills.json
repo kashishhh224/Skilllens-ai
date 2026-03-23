@@ -1,0 +1,198 @@
+{
+  "Software Developer": {
+    "skills": [
+      "Python",
+      "Java",
+      "C#",
+      "JavaScript",
+      "Git",
+      "REST APIs",
+      "SQL",
+      "Object-Oriented Programming",
+      "Unit Testing",
+      "Agile",
+      "Docker",
+      "CI/CD",
+      "Design Patterns"
+    ],
+    "keywords": [
+      "software development",
+      "microservices",
+      "code review",
+      "scalability",
+      "performance optimization",
+      "debugging",
+      "continuous integration",
+      "continuous delivery"
+    ]
+  },
+  "Web Developer": {
+    "skills": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "React",
+      "Vue.js",
+      "Angular",
+      "Responsive Design",
+      "REST APIs",
+      "Node.js",
+      "Express",
+      "SQL",
+      "NoSQL",
+      "Version Control",
+      "Accessibility"
+    ],
+    "keywords": [
+      "frontend",
+      "backend",
+      "full-stack",
+      "single-page application",
+      "responsive",
+      "cross-browser",
+      "web performance",
+      "SEO"
+    ]
+  },
+  "Data Scientist": {
+    "skills": [
+      "Python",
+      "R",
+      "SQL",
+      "Pandas",
+      "NumPy",
+      "Scikit-learn",
+      "Machine Learning",
+      "Statistics",
+      "Data Visualization",
+      "Matplotlib",
+      "Seaborn",
+      "TensorFlow",
+      "PyTorch",
+      "Feature Engineering"
+    ],
+    "keywords": [
+      "predictive modeling",
+      "classification",
+      "regression",
+      "time series",
+      "A/B testing",
+      "hypothesis testing",
+      "data pipeline",
+      "ETL",
+      "business insights"
+    ]
+  },
+  "Machine Learning Engineer": {
+    "skills": [
+      "Python",
+      "TensorFlow",
+      "PyTorch",
+      "Scikit-learn",
+      "Machine Learning",
+      "Deep Learning",
+      "Neural Networks",
+      "Natural Language Processing",
+      "Computer Vision",
+      "MLOps",
+      "Docker",
+      "Kubernetes",
+      "SQL",
+      "Data Pipelines"
+    ],
+    "keywords": [
+      "model deployment",
+      "feature engineering",
+      "hyperparameter tuning",
+      "model optimization",
+      "production ML",
+      "A/B testing",
+      "data preprocessing",
+      "API development"
+    ]
+  },
+  "Backend Developer": {
+    "skills": [
+      "Python",
+      "Java",
+      "Node.js",
+      "Go",
+      "REST APIs",
+      "GraphQL",
+      "SQL",
+      "NoSQL",
+      "Redis",
+      "Docker",
+      "Kubernetes",
+      "Microservices",
+      "Message Queues",
+      "System Design"
+    ],
+    "keywords": [
+      "server-side",
+      "database design",
+      "API development",
+      "scalability",
+      "caching",
+      "authentication",
+      "load balancing",
+      "distributed systems"
+    ]
+  },
+  "Frontend Developer": {
+    "skills": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "TypeScript",
+      "React",
+      "Vue.js",
+      "Angular",
+      "Responsive Design",
+      "SASS",
+      "Webpack",
+      "Testing",
+      "Accessibility",
+      "Performance Optimization",
+      "State Management"
+    ],
+    "keywords": [
+      "user interface",
+      "user experience",
+      "responsive design",
+      "cross-browser",
+      "component-based",
+      "single-page application",
+      "CSS frameworks",
+      "frontend build tools"
+    ]
+  },
+  "Universal": {
+    "skills": [
+      "Communication",
+      "Leadership",
+      "Problem Solving",
+      "Project Management",
+      "Adaptability",
+      "Collaboration",
+      "Time Management",
+      "Critical Thinking",
+      "Attention to Detail",
+      "Organization",
+      "Strategic Planning",
+      "Analytical Skills"
+    ],
+    "keywords": [
+      "professionalism",
+      "efficiency",
+      "results-oriented",
+      "innovation",
+      "teamwork",
+      "stakeholder management",
+      "process improvement",
+      "deliverables",
+      "milestones",
+      "best practices"
+    ]
+  }
+}

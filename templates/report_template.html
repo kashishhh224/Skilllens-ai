@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Resume Analysis Report — SkillLens AI — {{ name }}</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; margin: 2rem; color: #1e293b; background: #f8fafc; }
+    .report { max-width: 800px; margin: 0 auto; background: #fff; padding: 2rem; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    h1 { color: #0f172a; margin-bottom: 0.25rem; }
+    .meta { color: #64748b; font-size: 0.9rem; margin-bottom: 1.5rem; }
+    .score-box { background: linear-gradient(135deg, #4F46E5, #06B6D4); color: #fff; padding: 1.5rem; border-radius: 12px; margin: 1.5rem 0; text-align: center; }
+    .score-box .value { font-size: 3rem; font-weight: 700; }
+    .score-box .label { font-size: 0.9rem; opacity: 0.9; }
+    h2 { color: #334155; font-size: 1.1rem; margin-top: 1.5rem; margin-bottom: 0.5rem; }
+    .pill { display: inline-block; padding: 0.25rem 0.6rem; margin: 0.2rem; border-radius: 999px; font-size: 0.85rem; background: #e2e8f0; }
+    .pill-success { background: #dcfce7; color: #166534; }
+    .pill-warning { background: #ffedd5; color: #c2410c; }
+    ul { padding-left: 1.25rem; }
+    li { margin-bottom: 0.35rem; }
+    .footer { margin-top: 2rem; font-size: 0.8rem; color: #94a3b8; }
+  </style>
+</head>
+<body>
+  <div class="report">
+    <h1>{{ name }}</h1>
+    <p class="meta">Target Role: {{ role }} | Generated: {{ generated_at }}</p>
+
+    <div class="score-box">
+      <div class="value">{{ score }}/100</div>
+      <div class="label">Resume Score</div>
+      {% if ats_score is defined %}
+      <div class="label">ATS Compatibility: {{ ats_score }}%</div>
+      {% endif %}
+      <div class="label">Skill Match: {{ skill_match_pct }}%</div>
+    </div>
+
+    <h2>Detected Skills</h2>
+    {% for skill in extracted_skills %}
+    <span class="pill pill-success">{{ skill }}</span>
+    {% endfor %}
+    {% if not extracted_skills %}
+    <p>No skills detected.</p>
+    {% endif %}
+
+    <h2>Missing Skills</h2>
+    {% for skill in missing_skills %}
+    <span class="pill pill-warning">{{ skill }}</span>
+    {% endfor %}
+    {% if not missing_skills %}
+    <p>All key skills covered.</p>
+    {% endif %}
+
+    <h2>Improvement Suggestions</h2>
+    <ol>
+    {% for s in suggestions %}
+    <li>{{ s }}</li>
+    {% endfor %}
+    </ol>
+    {% if not suggestions %}
+    <p>No major suggestions.</p>
+    {% endif %}
+
+    <p class="footer">SkillLens AI — Built with Flask, spaCy, and Scikit-learn</p>
+  </div>
+</body>
+</html>
